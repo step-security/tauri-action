@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "esnext",
+    "target": "es2022",
+    "pretty": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "rootDir": "./src"
+  },
+  "include": ["./src"]
+}

@@ -1,0 +1,11 @@
+{
+  "extends": ["config:base"],
+  "postUpdateOptions": ["pnpmDedupe"],
+  "packageRules": [
+    {
+      "matchPackageNames": ["*"],
+      "semanticCommitType": "chore",
+      "minimumReleaseAge": "3 days"
+    }
+  ]
+}
