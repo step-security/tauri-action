@@ -1,6 +1,6 @@
 name: 'tauri-action'
 description: 'Build tauri binaries for MacOS, Windows and Linux'
-author: 'Tauri Programme within The Commons Conservancy'
+author: 'step-security'
 branding:
   icon: 'box'
   color: 'blue'

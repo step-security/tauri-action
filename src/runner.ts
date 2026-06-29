@@ -74,7 +74,7 @@ async function getRunner(): Promise<Runner> {
     'Could not detect valid `@tauri-apps/cli` installation. Proceeding to install global npm package...',
   );
 
-  await execCommand('npm', ['install', '-g', `@tauri-apps/cli@v2`], {
+  await execCommand('npm', ['install', '-g', `@tauri-apps/cli@2.11.3`], {
     cwd: undefined,
   });
 

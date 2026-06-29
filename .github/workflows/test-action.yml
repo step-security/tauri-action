@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   pull_request:
   push:
-    branches:
-      - dev
 
 jobs:
   v2:
@@ -42,11 +40,6 @@ jobs:
       - uses: actions/checkout@v7
 
       # node
-      - name: install pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          version: 10.x.x
-
       - name: setup node
         uses: actions/setup-node@v6
         with:
@@ -57,37 +50,40 @@ jobs:
           echo "skipped"
         # disabled on desktop to test cli fallback install
         #cd ./.github/fixtures/example-with-tauri-v2
-        # pnpm install
+        # npm install
 
       # rust
       - name: install Rust stable (desktop)
         if: matrix.mobile == ''
-        uses: dtolnay/rust-toolchain@stable
+        uses: step-security/dtolnay-rust-toolchain@v1
         with:
+          toolchain: stable
           targets: aarch64-apple-darwin,x86_64-apple-darwin
 
       - name: install Rust stable (android)
         if: matrix.mobile == 'android'
-        uses: dtolnay/rust-toolchain@stable
+        uses: step-security/dtolnay-rust-toolchain@v1
         with:
+          toolchain: stable
           targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
 
       - name: install Rust stable (ios)
         if: matrix.mobile == 'ios'
-        uses: dtolnay/rust-toolchain@stable
+        uses: step-security/dtolnay-rust-toolchain@v1
         with:
+          toolchain: stable
           targets: aarch64-apple-ios
 
       - name: Set up JDK
         if: matrix.mobile == 'android'
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v4
         with:
           java-version: '21' # Maybe 17
           distribution: 'temurin'
 
       - name: Setup Android SDK
         if: matrix.mobile == 'android'
-        uses: android-actions/setup-android@v4
+        uses: step-security/setup-android@v4
 
       - name: Setup Android NDK
         if: matrix.mobile == 'android'
@@ -97,7 +93,7 @@ jobs:
           ndk-version: r29
           link-to-sdk: true
 
-      - uses: maxim-lobanov/setup-xcode@v1
+      - uses: step-security/setup-xcode@v1
         if: matrix.mobile == 'ios'
         with:
           xcode-version: 26.1
@@ -110,7 +106,7 @@ jobs:
           echo "APPLE_API_KEY_PATH=$APPLE_API_KEY_PATH" >> $GITHUB_ENV
           echo "API_PRIVATE_KEYS_DIR=$RUNNER_TEMP" >> $GITHUB_ENV
 
-      - uses: Swatinem/rust-cache@v2
+      - uses: step-security/rust-cache@v2
         with:
           cache-on-failure: true
           workspaces: |
@@ -127,7 +123,7 @@ jobs:
         if: matrix.mobile != ''
         run: |
           cd ./.github/fixtures/example-with-tauri-v2
-          pnpm dlx @tauri-apps/cli ${{ matrix.mobile }} init
+          npx @tauri-apps/cli ${{ matrix.mobile }} init
 
       - name: Preconfigured Tauri Project
         uses: ./
@@ -138,10 +134,6 @@ jobs:
           NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
         with:
           projectPath: ./.github/fixtures/example-with-tauri-v2
-          tagName: ${{ !github.event.pull_request.head.repo.fork && 'example-with-tauri-v__VERSION__' || '' }}
-          releaseName: 'Release example with preconfigured Tauri app v__VERSION__ for tauri-v2'
-          releaseBody: 'See the assets to download this version and install.'
-          releaseDraft: true
           args: ${{ matrix.args }}
           retryAttempts: 1
           uploadPlainBinary: true

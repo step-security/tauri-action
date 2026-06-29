@@ -73,7 +73,6 @@ export async function uploadAssets(
           name: assetName,
           // GitHub renames the filename so we'll also set the label which it leaves as-is.
           label: assetName,
-          // https://github.com/tauri-apps/tauri-action/pull/45
           // @ts-expect-error error TS2322: Type 'Buffer' is not assignable to type 'string'.
           data: fs.createReadStream(asset.path),
           owner,

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "tauri": "npx @tauri-apps/cli",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

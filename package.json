@@ -1,10 +1,7 @@
 {
   "name": "tauri-action",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "description": "Tauri GitHub Action",
-  "contributors": [
-    "Tauri Programme within The Commons Conservancy"
-  ],
   "license": "MIT",
   "main": "dist/index.js",
   "type": "module",
@@ -17,17 +14,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tauri-apps/tauri-action.git"
+    "url": "git+https://github.com/step-security/tauri-action.git"
   },
   "keywords": [
     "actions",
     "tauri"
   ],
-  "minimumReleaseAge": 4320,
   "dependencies": {
     "@actions/artifact": "6.2.1",
     "@actions/core": "3.0.1",
     "@actions/github": "9.1.1",
+    "axios": "^1.18.0",
     "execa": "9.6.1",
     "find-up-simple": "1.0.1",
     "globby": "16.2.0",
@@ -43,7 +40,6 @@
     "typescript": "6.0.3"
   },
   "engines": {
-    "pnpm": "^10.34.0",
-    "node": ">=20"
+    "node": ">=24"
   }
 }
