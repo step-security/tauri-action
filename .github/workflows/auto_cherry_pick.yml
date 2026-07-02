@@ -20,10 +20,6 @@ on:
         description: "Node.js version to use"
         required: false
         default: "24"
-      script:
-        description: "Build script to run"
-        required: false
-        default: "ncc build src/index.ts -o dist -m"
 
   pull_request:
     types: [ opened, synchronize, labeled ]
@@ -44,4 +40,3 @@ jobs:
       base_branch: ${{ inputs.base_branch || 'main' }}
       mode: ${{ github.event_name == 'pull_request' && 'verify' || inputs.mode || 'cherry-pick' }}
       node_version: ${{ inputs.node_version || '24' }}
-      script: ${{ inputs.script || 'ncc build src/index.ts -o dist -m' }}

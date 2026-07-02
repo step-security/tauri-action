@@ -10,10 +10,6 @@ on:
         description: "Node.js version to use"
         required: false
         default: "24"
-      script:
-        description: "Build script to run"
-        required: false
-        default: "ncc build src/index.ts -o dist -m"
 
 permissions:
   contents: read
@@ -29,4 +25,3 @@ jobs:
     with:
       tag: "${{ github.event.inputs.tag }}"
       node_version: ${{ inputs.node_version || '24' }}
-      script: ${{ inputs.script || 'ncc build src/index.ts -o dist -m' }}
