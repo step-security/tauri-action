@@ -4,11 +4,13 @@ on:
   workflow_dispatch:
   pull_request:
   push:
+    branches:
+      - main
 
 jobs:
   v2:
     permissions:
-      contents: write # required to create new releases
+      contents: read
     strategy:
       fail-fast: false
       matrix:
