@@ -34,7 +34,7 @@
     "tslib": "2.8.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.1",
+    "@biomejs/biome": "2.5.3",
     "@types/node": "24.13.2",
     "@vercel/ncc": "0.44.0",
     "typescript": "6.0.3"
